@@ -9,9 +9,11 @@ main :: proc() {
 
     for !rl.WindowShouldClose()
     {
+        test := rl.Vector2{0 , 0}
         rl.BeginDrawing()
         rl.ClearBackground({40, 40, 40, 255})
         
+        rl.DrawRectangle(300, 300, 100, 100, rl.GREEN)
         rl.DrawText("Hi love hope everything is working :3", 190, 200, 20, {240, 240, 240, 255})
 
         rl.EndDrawing()
