@@ -96,3 +96,22 @@ RenderPlacedTowers :: proc(towers : [dynamic]Tower) {
         }
     }
 }
+
+RenderEnemies :: proc (enemies : [dynamic]Enemy) {
+    for enemy in enemies {
+        if gameState.isPast
+        {
+            if enemy.type == .Warrior || enemy.type == .Berserker
+            {
+                rl.DrawTextureV(loadedTexture.enemies[enemy.type], {enemy.position.x - (TILE_SIZE / 2), enemy.position.y - (TILE_SIZE / 2)}, rl.WHITE)
+            }
+        }
+        else
+        {
+            if enemy.type == .Drone || enemy.type == .Robot
+            {
+                rl.DrawTextureV(loadedTexture.enemies[enemy.type], {enemy.position.x - (TILE_SIZE / 2), enemy.position.y - (TILE_SIZE / 2)}, rl.WHITE)
+            }
+        }
+    }
+}

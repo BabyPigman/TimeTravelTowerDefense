@@ -26,7 +26,8 @@ Enemy :: struct {
     health : int,
     speed : int,
     path : Path,
-    target : int,
+    target : rl.Vector2,
+    targetIndex : int
 }
 
 CreateEnemy :: proc(type : EnemyType) -> (Enemy){
