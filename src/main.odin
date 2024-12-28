@@ -81,7 +81,7 @@ main :: proc() {
         }
 
         rl.BeginDrawing()
-        rl.ClearBackground({40, 40, 40, 255})
+        rl.ClearBackground({36, 79, 85, 255} if gameState.isPast else {33, 23, 41, 255})
         
         rl.BeginMode2D(camera)
 
