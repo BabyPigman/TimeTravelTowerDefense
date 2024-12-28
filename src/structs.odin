@@ -55,4 +55,17 @@ Tower :: struct {
     type : TowerType,
     position : rl.Vector2,
     radius : int,
+    range : int,
+    needPower : bool,
+    hasPower : bool,
+    damage : int
+}
+
+// Projectile //
+
+ProjectileType :: enum {Arrow, Laser, Lightning}
+
+Projectile :: struct {
+    type : ProjectileType,
+    position : rl.Vector2,
 }
