@@ -69,3 +69,12 @@ Projectile :: struct {
     type : ProjectileType,
     position : rl.Vector2,
 }
+
+// Gameplay //
+
+GameState :: struct {
+    currentLevel : i8,
+    isPast : bool,
+    selectedTower : TowerType,
+    isPlacing : bool
+}

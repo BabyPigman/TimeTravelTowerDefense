@@ -26,7 +26,7 @@ LoadGameTextures :: proc(){
     loadedTexture.backgroundPast[0] = rl.LoadTexture("res/levels/level1_prototype_past.png")
     loadedTexture.backgroundPast[1] = rl.LoadTexture("res/levels/level2_prototype_past.png")
     loadedTexture.backgroundPast[2] = rl.LoadTexture("res/levels/level3_prototype_past.png")
-    
+
     loadedTexture.backgroundFuture[0] = rl.LoadTexture("res/levels/level1_prototype_future.png")
     loadedTexture.backgroundFuture[1] = rl.LoadTexture("res/levels/level2_prototype_future.png")
     loadedTexture.backgroundFuture[2] = rl.LoadTexture("res/levels/level3_prototype_future.png")
@@ -54,6 +54,23 @@ LoadGameTextures :: proc(){
     loadedTexture.projectiles[2] = rl.LoadTexture("res/projectiles/projectile_lightning.png")
 }
 
-RenderBackground :: proc(){
+RenderBackground :: proc(level : i8, isPast : bool){
+    if isPast do rl.DrawTexture(loadedTexture.backgroundPast[level - 1], 0, 0, {255, 255, 255, 255})
+    else do      rl.DrawTexture(loadedTexture.backgroundFuture[level - 1], 0, 0, {255, 255, 255, 255})
+}
 
+RenderPlacingTower :: proc() {
+    if gameState.isPlacing
+    {
+        rl.DrawCircle(GetMouseX(), GetMouseY(), 9, {0, 0, 0, 100})
+        if gameState.isPast
+        {
+            rl.DrawTexture(loadedTexture.towersPast[gameState.selectedTower], GetMouseX() - (TILE_SIZE / 2), GetMouseY() - (TILE_SIZE / 2), {255, 255, 255, 255})
+        }
+        else
+        {
+            rl.DrawTexture(loadedTexture.towersFuture[gameState.selectedTower], GetMouseX() - (TILE_SIZE / 2), GetMouseY() - (TILE_SIZE / 2), {255, 255, 255, 255})
+        }
+        rl.DrawCircleLines(GetMouseX(), GetMouseY(), 48, {255, 255, 255, 255})
+    }
 }
