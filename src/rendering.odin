@@ -59,10 +59,17 @@ RenderBackground :: proc(level : i8, isPast : bool){
     else do      rl.DrawTexture(loadedTexture.backgroundFuture[level - 1], 0, 0, {255, 255, 255, 255})
 }
 
-RenderPlacingTower :: proc() {
+RenderPlacingTower :: proc(towers : [dynamic]Tower) {
     if gameState.isPlacing
     {
+        // tower radius
         rl.DrawCircle(GetMouseX(), GetMouseY(), 9, {0, 0, 0, 100})
+        // all other radii
+        for tower in towers {
+            rl.DrawCircleV(tower.position, 9, {0, 0, 0, 100})
+        }
+        
+        // tower texture
         if gameState.isPast
         {
             rl.DrawTexture(loadedTexture.towersPast[gameState.selectedTower], GetMouseX() - (TILE_SIZE / 2), GetMouseY() - (TILE_SIZE / 2), {255, 255, 255, 255})
@@ -71,6 +78,21 @@ RenderPlacingTower :: proc() {
         {
             rl.DrawTexture(loadedTexture.towersFuture[gameState.selectedTower], GetMouseX() - (TILE_SIZE / 2), GetMouseY() - (TILE_SIZE / 2), {255, 255, 255, 255})
         }
+
+        // tower range
         rl.DrawCircleLines(GetMouseX(), GetMouseY(), 48, {255, 255, 255, 255})
+    }
+}
+
+RenderPlacedTowers :: proc(towers : [dynamic]Tower) {
+    for tower in towers {
+        if gameState.isPast
+        {
+            rl.DrawTextureV(loadedTexture.towersPast[tower.type], {tower.position.x - (TILE_SIZE / 2), tower.position.y - (TILE_SIZE / 2)}, {255, 255, 255, 255})
+        }
+        else
+        {
+            rl.DrawTextureV(loadedTexture.towersFuture[tower.type], {tower.position.x - (TILE_SIZE / 2), tower.position.y - (TILE_SIZE / 2)}, {255, 255, 255, 255})
+        }
     }
 }

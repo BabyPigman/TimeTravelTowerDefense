@@ -24,6 +24,8 @@ main :: proc() {
     fontTtf := rl.LoadFontEx("res/JetBrainsMono-VariableFont_wght.ttf", 32, nil, 0)
     LoadGameTextures()
 
+    towers : [dynamic]Tower
+
     for !rl.WindowShouldClose()
     {
         if rl.IsKeyPressed(.SPACE)
@@ -52,17 +54,29 @@ main :: proc() {
         }
         else if rl.IsMouseButtonPressed(.LEFT)
         {
+            mousePos : [2]f32 = { f32(GetMouseX()), f32(GetMouseY()) }
+            // check you're not overlapping a tower
+            for tower in towers {
+                if rl.Vector2DistanceSqrt(mousePos, tower.position) < 320 // why is it 320? God only knows
+                {
+                    gameState.isPlacing = false
+                }
+            }
+
+            // TODO: check you're not overlapping the path
+
             if gameState.isPlacing
             {
                 gameState.isPlacing = false
-                if gameState.isPast
-                {
-                    
+                newTower : Tower = {
+                    type = gameState.selectedTower,
+                    position = {f32(GetMouseX()), f32(GetMouseY())},
+                    range = 48,
+                    needPower = false,
+                    hasPower = false,
+                    damage = 40
                 }
-                else
-                {
-
-                }
+                append(&towers, newTower)
             }
         }
 
@@ -72,7 +86,8 @@ main :: proc() {
         rl.BeginMode2D(camera)
 
         RenderBackground(gameState.currentLevel, gameState.isPast)
-        RenderPlacingTower()
+        RenderPlacedTowers(towers)
+        RenderPlacingTower(towers)
 
         // rl.DrawTextEx(fontTtf, "Let's see if fonts work", {190, 200}, f32(fontTtf.baseSize), 2, {240, 240, 240, 255})  
 

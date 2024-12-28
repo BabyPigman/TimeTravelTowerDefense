@@ -54,7 +54,6 @@ TowerType :: enum {Basic, Power, AOE, Chronomancy}
 Tower :: struct {
     type : TowerType,
     position : rl.Vector2,
-    radius : int,
     range : int,
     needPower : bool,
     hasPower : bool,
