@@ -30,7 +30,7 @@ main :: proc() {
     spawn_timer_past : f32 = 1
     spawn_timer_future : f32 = 2
 
-    path := CreatePath( // im so sorry
+    path := CreatePath( // im so sorry //hehe hardcoding my beloved <3
         {0, 13},
         {5, 13},
         {5, 4},

@@ -16,12 +16,6 @@ GameTextures :: struct{
 loadedTexture : GameTextures
 
 LoadGameTextures :: proc(){
-    // path : cstring
-    // for i in 0..<3{
-    //     path = strings.clone_to_cstring(strings.concatenate({"res//levels//level", strconv.itoa(i)})) //Convert int to string how???!??!??!??!??!??!??!??!?!?!?!??!?!?!?!!??!?!?!?!?!?!?!?!?!?
-    //     loadedTexture.background[i] = rl.LoadTexture(path)
-    // }
-
     // Levels
     loadedTexture.backgroundPast[0] = rl.LoadTexture("res/levels/level1_prototype_past.png")
     loadedTexture.backgroundPast[1] = rl.LoadTexture("res/levels/level2_prototype_past.png")

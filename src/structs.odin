@@ -27,7 +27,8 @@ Enemy :: struct {
     speed : int,
     path : Path,
     target : rl.Vector2,
-    targetIndex : int
+    targetIndex : int,
+    speedMod : f32,
 }
 
 CreateEnemy :: proc(type : EnemyType) -> (Enemy){
@@ -58,7 +59,9 @@ Tower :: struct {
     range : int,
     needPower : bool,
     hasPower : bool,
-    damage : int
+    damage : int,
+    cooldown: int,
+    maxCooldown: int,
 }
 
 // Projectile //
